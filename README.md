@@ -4,6 +4,9 @@ Feel like other clock add-ons are too small to read? You've come to the right pl
 
 No permissions are required.
 
+
+![](screenshot-dark.png)
+
 ## Clock-hours
 
 [Clock-hours](https://addons.mozilla.org/en-US/firefox/addon/clock-hours/) add-on allows users to view the hour portion (in 24 hour format) of the current time. An accompanying minutes add-on should be available under "Clock-minutes" to form a complete clock.
