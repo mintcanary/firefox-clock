@@ -10,6 +10,14 @@
 	// Please see the following screenshot of the expected use of both add-ons: 
 	// https://imgur.com/a/mr06PwL 
 
+	let defaultFillColor = "#000000";
+
+	if (window.matchMedia && !!window.matchMedia('(prefers-color-scheme: dark)').matches) {
+		defaultFillColor = "#FFFFFF";
+	}
+
+	let fillColor = defaultFillColor;
+
 	function draw(digits) {
 		var canvas = document.createElement('canvas'); // Create the canvas
 		canvas.width = 64;
@@ -17,12 +25,7 @@
 	  
 		var context = canvas.getContext('2d');
 
-		if (window.matchMedia && !!window.matchMedia('(prefers-color-scheme: dark)').matches) {
-			context.fillStyle = "#FFFFFF";
-		} else {
-			context.fillStyle = "#000000";
-		}
-	  
+		context.fillStyle = fillColor;
 		context.textAlign = "center";
 		context.textBaseline = "middle";
 		context.font = "64px Trebuchet MS";
@@ -31,7 +34,7 @@
 		browser.browserAction.setIcon({
 		  imageData: context.getImageData(0, 0, 64, 64)
 		});
-	  }
+	}
 
 	function updateClock() {
 		const date = new Date();
@@ -56,5 +59,27 @@
 		setTimeout(callback, getNextTimeout());
 	};
 
-	callback();
+	async function init() {
+		const themeInfo = await browser.theme.getCurrent();
+
+		if (themeInfo.colors) {
+			fillColor = themeInfo.colors.icons;
+		}
+
+		callback();
+	}
+
+	function handleTheme(updateInfo) {
+		if (updateInfo.theme.colors) {
+			fillColor = updateInfo.theme.colors.icons;
+		} else {
+			fillColor = defaultFillColor;
+		}
+
+		callback();
+	}
+
+	init();
+
+	browser.theme.onUpdated.addListener(handleTheme);
 })();
