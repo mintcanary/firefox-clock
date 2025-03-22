@@ -6,7 +6,8 @@
   "description": "Adds minutes part of clock in Toolbar",
 
 	"icons": {
-	 "48": "icon48.png"
+    "48": "icon48.png",
+    "96": "icon96.png"
  	},
 
   "browser_action": {
