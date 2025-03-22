@@ -28,7 +28,7 @@
 		context.fillStyle = fillColor;
 		context.textAlign = "center";
 		context.textBaseline = "middle";
-		context.font = "64px Trebuchet MS";
+		context.font = "56px system-ui";
 		context.fillText(digits, 32, 32);
 	  
 		browser.browserAction.setIcon({
