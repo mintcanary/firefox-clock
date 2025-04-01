@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Clock: Hours",
-  "version": "1.0",
+  "version": "1.1",
 
   "description": "Adds hour part of clock in Toolbar",
 
@@ -17,5 +17,17 @@
 
 	"background": {
 	  "scripts": ["badge-clock.js"]
-	}
+	},
+
+  "permissions": ["storage"],
+
+  "options_ui": {
+    "page": "options.html"
+  },
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "clock-hours@mintcanary.com"
+    }
+  }
 }

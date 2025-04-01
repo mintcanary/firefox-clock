@@ -8,6 +8,7 @@
 	}
 
 	let fillColor = defaultFillColor;
+	let timeFormat = 24;
 
 	function draw(digits) {
 		var canvas = document.createElement('canvas'); // Create the canvas
@@ -30,7 +31,13 @@
 	function updateClock() {
 		const date = new Date();
 		const mm = date.getMinutes().toString().padStart(2, "0");
-		let hour_value = date.getHours();
+		let hour_value;
+
+		if(timeFormat == 12) {
+			hour_value = date.getHours() % 12 || 12;  // 12h instead of 24h
+		} else {
+			hour_value = date.getHours();
+		}
 
 		const hh = hour_value.toString().padStart(2, "0");
 
@@ -52,9 +59,14 @@
 
 	async function init() {
 		const themeInfo = await browser.theme.getCurrent();
+		const options = await browser.storage.sync.get();
 
 		if (themeInfo.colors) {
 			fillColor = themeInfo.colors.icons;
+		}
+
+		if(options.format) {
+			timeFormat = options.format;
 		}
 
 		callback();
@@ -70,7 +82,16 @@
 		callback();
 	}
 
+	function handleOptions(updateInfo) {
+		if(updateInfo.format) {
+			timeFormat = updateInfo.format.newValue;
+		}
+
+		callback();
+	}
+
 	init();
 
 	browser.theme.onUpdated.addListener(handleTheme);
+	browser.storage.sync.onChanged.addListener(handleOptions);
 })();

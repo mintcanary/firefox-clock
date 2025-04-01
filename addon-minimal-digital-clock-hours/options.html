@@ -1,0 +1,30 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="color-scheme" content="dark light" />
+  </head>
+
+  <body>
+    <form>
+      <fieldset id="time-format">
+        <legend>Time format</legend>
+
+        <label for="input-24">
+          <input type="radio" id="input-24" name="timeFormat" value="24" checked />
+          <span>24hr</span>
+        </label>
+
+        <label for="input-12">
+          <input type="radio" id="input-12" name="timeFormat" value="12" />
+          <span>12hr</span>
+        </label>
+      </fieldset>
+
+      <button type="submit">Save</button>
+    </form>
+
+    <script src="options.js"></script>
+  </body>
+</html>
